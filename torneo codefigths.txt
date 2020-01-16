@@ -1,4 +1,1191 @@
-﻿
+﻿     -----------------------------------------  
+double factorial(long n)
+        {
+            double prod = 1;
+            for (int i = 2; i <= n; i++)
+            {
+                prod *= i;
+            }
+            return prod;
+        }
+
+         long deranged(int n)
+        {
+            double nf = (double) factorial(n);
+            double sum = 0;
+            for (int k = 0; k <= n; k++)
+            {
+                sum += (long)Math.Pow(-1, k)/factorial(k) ;
+            }
+            return (long)(nf * sum);
+        }
+-------------------------------------------------
+static   string words(int arg1)
+        {
+         https://codefights.com/challenge/d6q43BpSnHhvNPKTE/main
+            string answer = "";
+
+
+            int cen = (arg1 / 100) % 10;
+            int dec = (arg1 / 10) % 10;
+            int uni = arg1 % 10;
+
+            string[] unidades = { "", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+                                "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
+            //string[] teen = { "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
+            string[] decenas = { "", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" };
+            string[] centenas = {"","one hundred", "two hundred" , "three hundred", "four hundred",
+                                     "five hundred", "six hundred", "seven hundred", "eight hundred", "nine hundred"};
+
+            string ns = arg1.ToString();
+            
+
+            if (ns.Length >= 2)
+            {
+                answer += centenas[cen] + " ";
+                string sub = ns.Substring(ns.Length-2, 2);
+
+                if (int.Parse(sub) < 10)
+                {
+                    answer+= unidades[uni];
+                }
+                else if (int.Parse(sub) < 20)
+                {
+                    answer += unidades[int.Parse(dec.ToString() + uni.ToString())];
+                }
+                else
+                {
+                    answer = centenas[cen] + " " + decenas[dec] + " " + unidades[uni];
+                }
+                //Console.WriteLine(sub);
+            }
+            else if (ns.Length < 2)
+            {
+                answer += unidades[uni];
+            }
+
+
+            return answer.Trim();
+
+        }
+
+
+static int WordScore(string word)
+        {
+            int sum = 0;
+            for (int i = 0; i < word.Length; i++)
+            {
+                sum += word[i] - 'a' + 1;
+            }
+            return sum;
+        }
+
+ bool WordSquare(string letters)
+        {
+
+            int lenLinea = (int)Math.Sqrt(letters.Length);
+            if (lenLinea * lenLinea != letters.Length)
+            {
+                return false;
+            }
+
+            Dictionary<char, int> diccio = new Dictionary<char, int>();
+            foreach (char ch in letters)
+            {
+                if (diccio.ContainsKey(ch))
+                {
+                    diccio[ch]++;
+                }
+                else
+                {
+                    diccio[ch] = 1;
+                }
+            }
+
+            int unicos = 0;
+            int pares = 0;
+            foreach (KeyValuePair<char, int> kvp in diccio)
+            {
+                //if (kvp.Value % 2 != 0)
+                //{
+                //    if (kvp.Value != 1)
+                //    {
+                //        return false;
+                //    }
+                //}
+                if (kvp.Value == 1)
+                {
+                    unicos++;
+                }
+                if (kvp.Value % 2 == 0)
+                {
+                    pares += kvp.Value;
+                }
+            }
+
+            if (unicos > lenLinea)
+            {
+                return false;
+            }
+            //if (pares < letters.Length - unicos)
+            //{
+            //    return false;
+            //}
+
+            return true;
+
+
+        }
+
+
+static double companyBotStrategy(int[][] trainingData)
+        {
+            double sum = 0.0;
+            double cont = 0;
+            for (int i = 0; i < trainingData.Length; i++)
+            {
+                if (trainingData[i][1] == 1)
+                {
+                    sum += trainingData[i][0];
+                    cont++;
+                }
+            }
+            return sum / cont;
+        }
+
+
+
+static  int combinePasture(int[] vertices)
+        {
+           /*
+           A (vertices[0], vertices[1])
+           B (vertices[2], vertices[3]) 
+           X (vertices[4], vertices[5]) 
+           Y (vertices[6], vertices[7])
+           */
+
+            int izq = Math.Min(vertices[0], vertices[4]);
+            int der = Math.Max(vertices[2], vertices[6]);
+
+            int arriba = Math.Max(vertices[3], vertices[7]);
+            int abajo = Math.Min(vertices[1], vertices[5]);
+
+            int lado = Math.Max(der - izq, arriba - abajo);
+            return lado * lado;
+        }
+
+static int[] codefightsTournament(int position, int score)
+        {
+            return new int[]
+            {
+                (int)( 2000.0 / Math.Pow( 2.0, position-1)),
+                position == 1 ? 2*score : score
+            };
+        }
+
+
+static int circleOfNumbers(int n, int firstNumber)
+        {
+            int mitad = n / 2;
+
+            if (firstNumber < mitad)
+            {
+                return firstNumber + mitad;
+            }
+            else
+            {
+                return firstNumber - mitad;
+            }
+
+        }
+
+
+        static long circleChildren(long k, long m)
+        {
+            //return (Math.Max(k, m) - Math.Min(k, m)) * 2;
+            return Math.Abs(k - m) * 2;
+        }
+
+
+        static int sumRango(int n)
+        {
+            return (n * (n + 1)) / 2;
+        }
+
+        static int checkWeights(int[][] boxes, int packageWeight)
+        {
+		/*
+
+	You work for a company that makes weights that are used for balancing scales in high school science classes. The weights are shipped in boxes, and each box contains weights in a certain range. Each box is labeled with an array that represents the weights it contains. For example, a box of weights from 4to 12 is labeled [4, 12]. The company never ships the same weight twice in a shipment.
+A high school that needs a new set of weights orders a package that consists of several boxes. Once in a while, something goes wrong and either one weight falls off the line, or one weight is accidentally added to one of the boxes. Your job is to check each package before it goes out, and detect if this is the case.
+Given the labels of the boxes about to be shipped and the actual packageWeight, you should return:
+•	0 if the provided actual packageWeight equals the package weight you would expect according to the label;
+•	a if weight a was accidentally added to the package;
+•	-a if weight a is missing from the package.
+Example
+•	For boxes = [[1, 2], [3, 4]] and packageWeight = 10, the output should be
+checkWeights(boxes, packageWeight) = 0.
+The total expected weight of the package is (1 + 2) + (3 + 4) = 10, which is equal to the packageWeight.
+•	For boxes = [[1, 3], [8, 10]] and packageWeight = 35, the output should be
+checkWeights(boxes, packageWeight) = 2.
+The total expected weight of the package is (1 + 2 + 3) + (8 + 9 + 10) = 33, which means that a weight weighing 2 was accidentally added to the package.
+•	For boxes = [[1, 2], [3, 4]] and packageWeight = 6, the output should be
+checkWeights(boxes, packageWeight) = -4.
+The total expected weight of the weights is (1 + 2) + (3 + 4) = 10, which means that weight 4 is missing from the package.
+
+         */
+
+
+            long sum = 0;
+            for (int i = 0; i < boxes.Length; i++)
+            {
+                sum += (sumRango(boxes[i][1]) - sumRango(boxes[i][0]-1));
+            }
+
+            return (int)(sum - packageWeight);
+        }
+
+
+
+
+static bool checkSumSub(int[] arr, int k)
+        {
+
+          /*
+          You are given an array of integers arr and a target k. Your task is to figure out whether you can pick a subarray of arr such that its elements add up to k.
+Example
+For arr = [0, 1, 2, 3, 4, 5] and k = 7, the answer should be
+checkSum(arr, k) = true.
+The sum of the elements of the subarray [3, 4]is exactly 7, so the answer is true.
+
+		*/
+           // Dictionary<int, int> map = new Dictionary<int, int>();
+            HashSet<int> hs = new HashSet<int>();
+
+            int curr_sum = 0;
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                curr_sum += arr[i];
+
+                if (curr_sum == k)
+                {
+                    return true;
+                }
+
+                if (hs.Contains(curr_sum - k))
+                {
+                    return true;
+                }
+                hs.Add(curr_sum);
+            }
+            return false;
+        }
+
+
+
+static int checksum_part1(long barcode)
+        {
+
+         /*
+Given the first 11 digits of a GTIN-12 barcode as an integer (i.e. without leading zeros), determine the last number by calculating the value of the check digit.
+Example
+For a = 29104150021, the output should be
+checksum_part1(a) = 9.
+The digit sum can be calculated as follows, using the information in the link above:
+You know that you need to multiply the digit at N1 by 3, the digit at N2 by 1, and so on, then add these numbers together: 2 * 3 + 9 * 1 + 1 * 3 + 0 * 1 + 4 * 3 + 1 * 1 + 5 * 3 + 0 * 1 + 0 * 3 + 2 * 1 + 1 * 3 = 51
+Then, you need to subtract that sum from the nearest equal or higher multiple of ten: 60 - 51 = 9.
+
+*/
+
+            int sum = 0;
+            string s = barcode.ToString();
+
+            if (barcode.ToString().Length % 2 == 0)
+            {
+                for (int i = 0; i < s.Length; i++)
+                {
+                    if (i % 2 == 0)
+                    {
+                        sum += (int.Parse(s[i].ToString()) * 3);
+                    }
+                    else
+                    {
+                        sum += (int.Parse(s[i].ToString()) * 1);
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < s.Length; i++)
+                {
+                    if (i % 2 == 0)
+                    {
+                        sum += (int.Parse(s[i].ToString()) * 1);
+                    }
+                    else
+                    {
+                        sum += (int.Parse(s[i].ToString()) * 3);
+                    }
+                }
+            }
+
+            int nearestMultiple = sum;
+            while (nearestMultiple % 10 != 0)
+            {
+                nearestMultiple++;
+            }
+
+            Console.WriteLine(sum + " " + nearestMultiple);
+            return nearestMultiple - sum;
+        }
+
+
+static int checkrange(int[] A, int a, int b)
+        {
+            int ans = 0;
+            foreach (int elem in A)
+            {
+                if (elem >= a && elem <= b)
+                {
+                    ans++;
+                }
+            }
+            return ans;
+        }
+
+
+static bool checkEqualFrequency(int[] i)
+        {
+
+         /*
+		Given array of integers, check whether each integer, that occurs in it, is contained there the same number of times as any other integer from the given array.
+		Example
+		•	For inputArray = [1, 2, 2, 1], the output should be
+		checkEqualFrequency(inputArray) = true;
+		•	For inputArray = [1, 2, 2, 3, 1, 3, 1, 3], the output should be
+		checkEqualFrequency(inputArray) = false.
+
+	*/
+            return i.Length % i.Distinct().Count() ==0;
+
+        }
+
+
+bool Check(std::string N) {
+	
+      //Check divisibility of N by 11. If N % 11 == 0then the answer is true, otherwise it is false.
+
+	int pares = 0;
+	int impares = 0;
+	
+	for(int i = 0; i < N.length(); i++) {
+		
+		int dig = (N[i] - '0');
+		if(i%2==0 ) {
+			pares += dig;
+		}else{
+			impares += dig;
+		}
+	}
+	
+	int resta = pares - impares;
+	if(resta == 0 || resta % 11 == 0) {
+		return true;
+	}
+	return false;
+}
+
+
+
+static string charWeight(string s)
+        {
+
+        /*
+		Given a string s, your task is to calculate the weight of each character in it, where weight is the number of times a character appears in the string (case insensitive).
+The answer should be returned as a string in the format char1{weight1}char2{weight2}..., with the characters sorted as follows:
+1.	The characters with larger weights should come first;
+2.	In the case of a tie, the characters should be sorted by their char code values in ascending order.
+Example
+•	For s = "codefights", the output should be
+charWeight = "c{1}d{1}e{1}f{1}g{1}h{1}i{1}o{1}s{1}t{1}"
+Each character appears in s exactly once, so the characters are sorted by their char codes.
+•	For s = "Google", the output should be
+charWeight = "g{2}o{2}e{1}l{1}"
+The letters 'g' and 'o' both appear twice, so they come first, followed by the other letters.
+
+	*/
+            Dictionary<char, int> frec = s.ToLower() .ToCharArray().GroupBy(x => x)
+                .ToDictionary(x => x.Key, x => x.Count());
+
+            char[] keys = frec.Keys.ToArray();
+            int[] values = frec.Values.ToArray();
+
+            //Array.Sort(values, keys);
+            for (int i = 0; i < keys.Length; i++)
+            {
+                for (int j = i + 1; j < keys.Length; j++)
+                {
+                    if (values[i] < values[j])
+                    {
+                        int tempVal = values[i];
+                        values[i] = values[j];
+                        values[j] = tempVal;
+
+                        char tempKey = keys[i];
+                        keys[i] = keys[j];
+                        keys[j] = tempKey;
+                    }
+                    else if (values[i] == values[j])
+                    {
+                        if (keys[i] > keys[j])
+                        {
+                            char tempKey = keys[i];
+                            keys[i] = keys[j];
+                            keys[j] = tempKey;
+
+                        }
+                    }
+
+                }
+
+            }
+
+            string res = "";
+            for (int i = 0; i < keys.Length; i++)
+            {
+                res += keys[i] + "{" + values[i] + "}";
+            }
+            return res;
+        }
+
+
+
+static int CeilIndex(int[] A, int l, int r, int key)
+        {
+            while (r - l > 1)
+            {
+                int m = l + (r - l) / 2;
+                if (A[m] >= key)
+                    r = m;
+                else
+                    l = m;
+            }
+
+            return r;
+        }
+
+        static int LongestIncreasingSubsequenceLength(int[] A, int size)
+        {
+            // Add boundary case, when array size is one
+
+            int[] tailTable = new int[size];
+            int len; // always points empty slot
+
+            tailTable[0] = A[0];
+            len = 1;
+            for (int i = 1; i < size; i++)
+            {
+                if (A[i] < tailTable[0])
+                    // new smallest value
+                    tailTable[0] = A[i];
+
+                else if (A[i] > tailTable[len - 1])
+                    // A[i] wants to extend largest subsequence
+                    tailTable[len++] = A[i];
+
+                else
+                    // A[i] wants to be current end candidate of an existing
+                    // subsequence. It will replace ceil value in tailTable
+                    tailTable[CeilIndex(tailTable, -1, len - 1, A[i])] = A[i];
+            }
+
+            return len;
+        }
+
+        static int chartFix(int[] chart)
+        {
+            return chart.Length - LongestIncreasingSubsequenceLength(chart, chart.Length);
+        }
+
+
+------------------------------
+static bool charactersRearrangement(string string1, string string2)
+        {
+            char[] a = string1.ToCharArray();
+            char[] b = string2.ToCharArray();
+
+            Array.Sort(a);
+            Array.Sort(b);
+
+            return new string(a) == new string(b);
+
+        }
+
+
+public static void rotate(char[] text, int k)
+        {
+        
+         	
+            if (text.Length > 0)
+            {
+
+                k = k % text.Length;
+
+
+                char[] copia = new char[text.Length];
+
+                for (int i = 0; i < text.Length - k; i++)
+                {
+                    copia[i + k] = text[i];
+                }
+
+                for (int i = text.Length - k; i < text.Length; i++)
+                {
+                    copia[i - (text.Length - k)] = text[i];
+                }
+
+                for (int i = 0; i < text.Length; i++)
+                {
+                    text[i] = copia[i];
+                }
+            }
+        }
+
+
+        static string changeOfVowelsInCycle(int cycle, string text)
+        {
+
+           /*
+
+		Given a text, reverse its characters and shift all of the vowels in a cycle.
+The vowels are 'a', 'e', 'i', 'o', and 'u' and can be upper- and lowercase.
+Example
+For cycle = 1 and text = "potato", the output should be
+changeOfVowelsInCycle(cycle, text) = "ototap".
+Reversed, the text becomes "otatop". The vowels in the text are 'o', 'a' and 'o' (in this exact order). When shifted by one, they become 'o', 'o' and 'a', so the final answer is "ototap".
+	
+
+		*/
+
+            char[] rev = text.ToCharArray();
+            Array.Reverse(rev);
+
+            string vocales = "";
+            bool[] posvocales = new bool[rev.Length];
+            for (int i = 0; i < posvocales.Length; i++)
+            {
+                if ("aeiouAEIOU".Contains(rev[i]))
+                {
+                    posvocales[i] = true;
+                    vocales += rev[i];
+                }
+            }
+
+            char[] vocales_rotadas = vocales.ToCharArray();  
+
+              rotate(vocales_rotadas, cycle);
+              //Console.WriteLine(new string(vocales_rotadas));
+              string ans = "";
+             int indice_vocales_rotadas =0;
+              for (int i = 0; i < rev.Length; i++)
+              {
+                  if (posvocales[i])
+                  {
+                      ans+= vocales_rotadas[indice_vocales_rotadas];
+                      indice_vocales_rotadas++;
+                  }
+                  else
+                  {
+                      ans += rev[i];
+                  }
+              }
+
+              return ans;
+        }
+
+
+------------------------------------------------
+       string changeCase(string word)
+        {
+            int lower = 0, upper = 0;
+
+            for (int i = 0; i < word.Length; i++)
+            {
+                if (char.IsLower(word[i]))
+                {
+                    lower++;
+                }
+                else if (char.IsUpper(word[i]))
+                {
+                    upper++;
+                }
+            }
+            if (lower >= upper)
+            {
+                return word.ToLower();
+            }
+            return word.ToUpper();
+
+        }
+
+
+static string Reemplazar(string text, string old)
+        {
+            string[] spl = text.Split(' ');
+
+            string[] originales = new string[spl.Length];
+            Array.Copy(spl, originales, spl.Length);
+
+            string ans = "";
+ 
+            //foreach (string s in spl)
+            for(int i =0; i < spl.Length; i++)
+            {
+                if (spl[i].ToLower() == old.ToLower())
+                {
+                    string replace = "";
+                    for (int j = 0; j < spl[i].Length; j++)
+                    {
+                        replace += "*";
+                    }
+                    ans += replace + " ";
+                }
+                else
+                {
+                    ans += originales[i] + " ";
+                }
+
+            }
+            return ans.Trim();
+
+        }
+
+        static string CensorThis(string text, string[] forbiddenWords)
+        {
+            foreach (string w in forbiddenWords)
+            {
+                text = Reemplazar(text, w);
+            }
+            return text;
+        }
+
+
+------------------------------------
+        static string CaPsLoCk(string arg1)
+        {
+            if (char.IsLower(arg1[0]))
+            {
+                return char.ToUpper(arg1[0]).ToString();
+            }
+            return char.ToLower(arg1[0]).ToString();
+        }
+
+        bool canYouHearMe(int[] arr)
+        {
+            double xGirl = arr[0];
+            double yGirl = arr[1];
+
+            double range = arr[2];
+
+            double xBrother = arr[3];
+            double yBrother = arr[4];
+
+            double dist =
+                Math.Sqrt(Math.Pow(xGirl - xBrother, 2) +
+                            Math.Pow(yGirl - yBrother, 2));
+
+            return dist <= range; 
+
+        }
+
+
+        static  bool canLaunch(int numberOfShips)
+        {
+            int pn = 0;
+            for (int n = 1;pn<=numberOfShips ; n++)
+            {
+                pn = n * (3 * n - 1) / 2;
+                if (pn == numberOfShips) return true;
+            }
+            return false;
+        }
+
+
+
+----------------------------------------------------------
+
+static void swap(char[][] gameboard, int f1, int c1, int f2, int c2)
+        {
+            char temp = gameboard[f1][c1];
+            gameboard[f1][c1] = gameboard[f2][c2];
+            gameboard[f2][c2] = temp;
+        }
+
+        static bool isPlayable(char[][] gameboard, int f, int c)
+        {
+            char actual = gameboard[f][0];
+            int cont = 1;
+            for (int col = 1; col < gameboard[0].Length; col++)
+            {
+                if (gameboard[f][col] == actual)
+                {
+                    cont++;
+                    if (cont >= 3)
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    cont = 1;
+                    actual = gameboard[f][col];
+                }
+            }
+
+            actual = gameboard[0][c];
+            cont = 1;
+
+            for (int fila = 1; fila < gameboard.Length; fila++)
+            {
+                if (gameboard[fila][c] == actual)
+                {
+                    cont++;
+                    if (cont >= 3)
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    cont = 1;
+                    actual = gameboard[fila][c];
+                }
+            }
+
+            return false;
+        }
+
+      
+
+        static bool candyCrush3(char[][] gameboard)
+        {
+            //if (candyCrush1(gameboard)) return true;
+
+            if (isPlayable(gameboard, 0, 0))
+            {
+                return true;
+            }
+            for (int i = 0; i < gameboard.Length; i++)
+            {
+                for (int j = 0; j + 1 < gameboard[i].Length; j++)
+                {
+
+                   // 
+                    swap(gameboard, i, j, i, j + 1);
+                    //MostrarTablero(gameboard);
+                    if (isPlayable(gameboard, i, j))
+                    {
+                        return true;
+                    }
+                    if (isPlayable(gameboard, i, j+1))
+                    {
+                        return true;
+                    }
+                    swap(gameboard, i, j + 1, i, j);
+                    //MostrarTablero(gameboard);
+                   // MostrarTablero(gameboard);
+
+                }
+            }
+            for (int j = 0; j < gameboard[0].Length; j++)
+            {
+                for (int i = 0; i + 1 < gameboard.Length; i++)
+                {
+                    swap(gameboard, i, j, i + 1, j);
+                    // MostrarTablero(gameboard);
+                    if (isPlayable(gameboard, i, j))
+                    {
+                        return true;
+                    }
+                    if (isPlayable(gameboard, i+1, j))
+                    {
+                        return true;
+                    }
+
+                    swap(gameboard, i + 1, j, i, j);
+                    // MostrarTablero(gameboard);
+                }
+            }
+            return false;
+        }
+
+
+
+---------------------------------------------------
+       static  bool candyCrush1(char[][] gameboard)
+        {
+
+            for (int i = 0; i < gameboard.Length; i++)
+            {
+                int j = 0;
+                char actual = gameboard[i][j];
+                int cont = 0;
+                while (j < gameboard[i].Length)
+                {
+                    if (gameboard[i][j] == actual)
+                    {
+                        cont++;
+                        if (cont >= 3) return true;
+                    }
+                    else
+                    {
+                        cont = 1;
+                        actual = gameboard[i][j];
+                    }
+
+                    j++;
+                }
+            }
+
+            for (int j = 0; j < gameboard[0].Length; j++)
+            {
+                int i = 0;
+                char actual = gameboard[i][j];
+                int cont = 0;
+                while (i < gameboard.Length)
+                {
+                    if (gameboard[i][j] == actual)
+                    {
+                        cont++;
+                        if (cont >= 3) return true;
+                    }
+                    else
+                    {
+                        cont = 1;
+                        actual = gameboard[i][j];
+                    }
+                    i++;
+                }
+            }
+
+            return false;
+
+        }
+
+       static bool candyCrush2(char[][] gameboard, int[] cell, char direction)
+       {
+           int fila = cell[0];
+           int col = cell[1];
+
+           if (direction == 'U')
+           {
+               char temp = gameboard[fila - 1][col];
+               gameboard[fila - 1][col] = gameboard[fila][col];
+               gameboard[fila][col] = temp;
+
+           }
+           else if (direction == 'D')
+           {
+               char temp = gameboard[fila + 1][col];
+               gameboard[fila + 1][col] = gameboard[fila][col];
+               gameboard[fila][col] = temp;
+           }
+           else if (direction == 'R')
+           {
+               char temp = gameboard[fila][col + 1];
+               gameboard[fila][col + 1] = gameboard[fila][col];
+               gameboard[fila][col] = temp;
+
+           }
+           else if (direction == 'L')
+           {
+               char temp = gameboard[fila][col- 1];
+               gameboard[fila][col - 1] = gameboard[fila][col];
+               gameboard[fila][col] = temp;
+           }
+
+           return candyCrush1(gameboard);
+
+       }
+
+
+
+
+static bool candyCrush1(char[][] gameboard)
+        {
+            for (int i = 0; i < gameboard.Length; i++)
+            {
+                string fila = new string(gameboard[i]);
+
+                if (fila.Contains("RRR") ||
+                    fila.Contains("BBB") ||
+                    fila.Contains("GGG") ||
+                    fila.Contains("YYY") ||
+                    fila.Contains("PPP") ||
+                    fila.Contains("OOO"))
+                {
+                    return true;
+                }
+            }
+            for (int j = 0; j < gameboard[0].Length; j++)
+            {
+                string col = "";
+                for (int i = 0; i < gameboard.Length; i++)
+                {
+                    col += gameboard[i][j];
+                }
+
+                if (col.Contains("RRR") ||
+                   col.Contains("BBB") ||
+                   col.Contains("GGG") ||
+                   col.Contains("YYY") ||
+                   col.Contains("PPP") ||
+                   col.Contains("OOO"))
+                {
+                    return true;
+                }
+
+            }
+
+            return false;
+        }
+
+
+
+int candles(int A, int B) {
+int burned = 0;
+  int leftowers = 0;
+  while (A > 0) {
+    burned += A;
+    leftowers += A;
+    A = leftowers / B;
+    leftowers %= B;
+  }
+  return burned;
+}
+
+static int candies(int n, int m)
+        {
+            return (int)(m / n)*n;
+        }
+
+        static string caesarian(string message, int n)
+        {
+
+            string alfab = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz";
+            string ans = "";
+            if (n > 0)
+            {
+                
+                 n = n % 26;
+                
+                
+                for (int i = 0; i < message.Length; i++)
+                {
+                    // ans +=  (alfab.IndexOf(text[i]) + shift).ToString().ToUpper();
+                    //ans += alfab[ text.IndexOf(i)+shift];
+                    if (char.IsLetter(message[i]))
+                    {
+                        int indalfab = alfab.IndexOf(message[i]);
+                        ans += alfab[indalfab + n].ToString();
+                    }
+                    else
+                    {
+                        ans += message[i];
+                    }
+                }
+            }
+            else if (n == 0)
+            {
+                return message;
+            }
+            else
+            {
+                n *= -1;
+                if (n > 26)
+                {
+                    n = n % 26;
+                }
+                n *= -1;
+
+
+                for (int i = 0; i < message.Length; i++)
+                {
+                    // ans +=  (alfab.IndexOf(text[i]) + shift).ToString().ToUpper();
+                    //ans += alfab[ text.IndexOf(i)+shift];
+                    if (char.IsLetter(message[i]))
+                    {
+                        int indalfab = alfab.LastIndexOf(message[i]);
+                        ans += alfab[indalfab + n].ToString();
+                    }
+                    else
+                    {
+                        ans += message[i];
+                    }
+                }
+            }
+            //Console.WriteLine(ans);
+            return ans;
+        }
+
+
+static string Caesar(string text, int shift)
+        {
+            string alfab = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz";
+
+            if (shift > alfab.Length)
+            {
+                shift = shift % alfab.Length;
+            }
+
+            string ans = "";
+            for (int i = 0; i < text.Length; i++)
+            {
+
+               // ans +=  (alfab.IndexOf(text[i]) + shift).ToString().ToUpper();
+                //ans += alfab[ text.IndexOf(i)+shift];
+                if (char.IsLetter(text[i]))
+                {
+                    int indalfab = alfab.IndexOf(text[i]);
+                    ans += alfab[indalfab + shift].ToString().ToUpper();
+                }
+                else
+                {
+                    ans += text[i];
+                }
+            }
+
+            return ans;
+        }
+
+
+static int gcd(int a, int b)
+        {
+            return b == 0 ? a : gcd(b, a % b);
+        }
+
+        static bool breakDown1(int[] arr)
+        {
+            for(int i =0; i<arr.Length; i++)
+            {
+                for(int j=i+1; j<arr.Length; j++)
+                {
+                    if (gcd(arr[i], arr[j]) != 1)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+
+
+std::string box(int n) {
+       
+/*      Given integer n >= 0, draw an n * n square using *'s and spaces. For n = 0, you should return an empty string. There should be no trailing newline*/
+
+
+        std::string box = "";
+        for(int i = 0; i < n-1; i++) {
+               
+                std::string linea = "";
+                for(int j = 0; j < n; j++) {
+                       
+                        if(i == 0 || j == 0 || i ==n-1 || j == n-1) {
+                                linea += "*";
+                        }else{
+                                linea += " ";
+                        }
+                }
+                box += linea;
+                box += "\n";
+        }
+        for(int j = 0; j < n; j++) {
+                box += "*";
+        }
+       
+        return box;
+}
+
+
+static int bowlingScore(int[] rolls)
+        {
+            int puntos = 0;
+            int i;
+            for (i = 0; i < rolls.Length; i += 2)
+            {
+                if (rolls[i] == 10)
+                {
+                    puntos += 30;
+
+                    if (rolls[i + 1] == 10)
+                    {
+                        puntos += 30;
+                    }
+                    else
+                    {
+                        puntos += rolls[i + 1];
+                    }
+                }
+                else
+                {
+                    puntos += rolls[i];
+                    if(i+1 <rolls.Length) {
+                        puntos += rolls[i + 1];
+                    }
+                }
+               // puntos += rolls[i + 1];
+            }
+
+            return puntos;
+        }
+     
+
+   static string[] bottles_of_beer(int n)
+        {
+            int max = n;
+
+            List<string> res = new List<string>();
+
+            if (n == 1)
+            {
+
+                res.Add("1 bottle of beer on the wall, 1 bottle of beer.");
+                res.Add("Take one down, pass it around, no more bottles of beer on the wall...");
+                res.Add("No more bottles of beer on the wall, no more bottles of beer.");
+                res.Add("Go to the store and buy some more, 1 bottle of beer on the wall.");
+            }
+            else
+            {
+                for (int i = n; i >= 1; i--)
+                {
+                    if (i > 1)
+                    {
+                        res.Add(i + " bottles of beer on the wall, " + i + " bottles of beer.");
+                        if (i - 1 > 1)
+                        {
+                            res.Add("Take one down, pass it around, " + (i - 1) + " bottles of beer on the wall...");
+                        }
+                        else if (i - 1 == 1)
+                        {
+                            res.Add("Take one down, pass it around, 1 bottle of beer on the wall...");
+                        }
+                    }
+                    else if (i == 1)
+                    {
+                        res.Add("1 bottle of beer on the wall, 1 bottle of beer.");
+                        res.Add("Take one down, pass it around, no more bottles of beer on the wall...");
+                        res.Add("No more bottles of beer on the wall, no more bottles of beer.");
+                        res.Add("Go to the store and buy some more, " + max + " bottles of beer on the wall.");
+                    }
+                }
+            }
+            return res.ToArray();
+
+        }
+
 
 int bitwiseandzero(int n, std::vector< int > array) {
  
