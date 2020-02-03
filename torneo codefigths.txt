@@ -1,4 +1,61 @@
-﻿     -----------------------------------------  
+﻿
+ static int higherVersion2(string ver1, string ver2)
+        {
+            string[] sv1 = ver1.Split('.');
+            string[] sv2 = ver2.Split('.');
+
+            for (int i = 0; i < sv1.Length; i++)
+            {
+                int a = int.Parse(sv1[i]);
+                int b = int.Parse(sv2[i]);
+
+                if (a > b)
+                {
+                    return 1;
+                }
+                else if (b > a)
+                {
+                    return -1;
+                }
+
+            }
+            return 0;
+        }
+
+  static char firstNotRepeatingCharacter(string s)
+        {
+            Dictionary<char, int> dic = new Dictionary<char, int>();
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (dic.ContainsKey(s[i]))
+                {
+                    dic[s[i]]++;
+                }
+                else
+                {
+                    dic[s[i]] = 1;
+                }
+            }
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (dic[s[i]] == 1) return s[i];
+            }
+            return '_';
+        }
+
+
+ static int numbersGrouping(int[] a)
+        {
+            HashSet<int> grupos = new HashSet<int>();
+            for (int i = 0; i < a.Length; i++)
+            {
+                
+                grupos.Add( (a[i] - 1) / 10000  );
+            }
+            return grupos.Count + a.Length ;
+        }
+
+     -----------------------------------------  
 double factorial(long n)
         {
             double prod = 1;
@@ -7598,7 +7655,7 @@ int numbersGrouping(int[] a) {
     return nGroupList.Sum();
 }
 
- static int numbersGrouping(int[] a)
+ static int numbersGrouping(int[] a) //funcionaria con numeros muy grandes
         {
             HashSet<int> hs = new HashSet<int>();
             foreach (int n in a)
