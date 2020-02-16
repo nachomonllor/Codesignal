@@ -1,4 +1,41 @@
 ﻿
+
+bool tripletSum(int x, int[] a) {
+            Dictionary<int, int> hash = new Dictionary<int, int>();
+            for (int i = 0; i < a.Length; i++)
+            {
+                if (hash.ContainsKey(a[i]))hash[a[i]]++;
+                else hash[a[i]] = 1;
+            }
+
+            for (int i = 0; i < a.Length - 1; i++)
+            {
+                for (int j = i + 1; j < a.Length; j++)
+                {
+                    int target = x - (a[i] + a[j]);
+                    if (hash.ContainsKey(target))
+                    {
+                        if (target == a[i] || target == a[j])
+                        {
+
+                            if (hash[target] > 1)
+                            {
+                                return true;
+                            }
+                        }
+                        else
+                        {
+                            return true;
+                                 
+                        }
+                    }
+                }
+            }
+            return false;
+}
+
+
+
  static int higherVersion2(string ver1, string ver2)
         {
             string[] sv1 = ver1.Split('.');
