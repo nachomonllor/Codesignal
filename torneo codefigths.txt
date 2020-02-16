@@ -1,4 +1,17 @@
-﻿
+﻿bool tripletSum(int x, int[] a) {
+    for (int i = 0; i < a.Length; i++) {
+        HashSet<int> h = new HashSet<int>();
+        int c = x - a[i];
+        
+        for (int j = i + 1; j < a.Length; j++) {
+            if (h.Contains(c - a[j])) return true;
+
+            h.Add(a[j]);
+        }
+    }
+
+    return false;
+}
 
 bool tripletSum(int x, int[] a) {
             Dictionary<int, int> hash = new Dictionary<int, int>();
