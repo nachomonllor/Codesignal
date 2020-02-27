@@ -1,4 +1,28 @@
-﻿bool tripletSum(int x, int[] a) {
+﻿
+static bool isSmooth(int[] arr)
+        {
+            int fisrt = arr.First();
+            int last = arr.Last();
+            if (arr.Length % 2 != 0)
+            {
+                if (arr[arr.Length / 2] == fisrt && arr[arr.Length / 2] == last)
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                int suma = arr[arr.Length / 2 - 1] + arr[arr.Length / 2];
+                if ( suma == fisrt && suma == last)
+                {
+                    return true;
+                }
+            }
+            return false;
+
+        }
+
+bool tripletSum(int x, int[] a) {
     for (int i = 0; i < a.Length; i++) {
         HashSet<int> h = new HashSet<int>();
         int c = x - a[i];
