@@ -1,0 +1,12 @@
+﻿ static int[][] swapDiagonals(int[][] matrix)
+        {
+
+            for (int i = 0; i < matrix.Length; i++)
+            {
+                int temp = matrix[i][i];
+                matrix[i][i] = matrix[i][matrix.Length - i - 1];
+                matrix[i][matrix.Length - i - 1] = temp;
+            }
+
+            return matrix;
+        }
