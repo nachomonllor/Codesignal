@@ -1,0 +1,36 @@
+﻿ https://app.codesignal.com/challenge/LC8sv7t8uDEccgDYs
+
+static int[] minimumOnStack(string[] operations)
+        {
+
+            //List<int> lista = new List<int>();
+            Stack<int> pila = new Stack<int>();
+            List<int> lista = new List<int>();
+
+            for (int i = 0; i < operations.Length; i++)
+            {
+                string[] o = operations[i].Split(' ');
+
+                if (o.Length > 1)
+                {
+                    int num = int.Parse(o[1]);
+                    pila.Push(num);
+                }
+                else
+                {
+                    if (o[0] == "min")
+                    {
+                     //   Console.WriteLine(pila.Min());
+                        lista.Add(pila.Min());
+                    }
+                    else
+                    {
+                        pila.Pop();
+                    }
+                }
+            
+            }
+            return lista.ToArray();
+
+
+        }
