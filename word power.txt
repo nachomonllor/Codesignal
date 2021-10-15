@@ -1,0 +1,10 @@
+
+https://app.codesignal.com/arcade/python-arcade/complexity-of-comprehension/5rZN7nJ7Tkd9S4TLC/solutions?solutionId=8sKKw3smpMN72NxBB
+
+def wordPower(word):
+    num = {c: ord(c) - 96 for c in word}
+    return sum([num[ch] for ch in word])
+
+word = "hello"
+
+print(wordPower(word))
